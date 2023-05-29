@@ -34,9 +34,25 @@ class HomePageApp extends HookWidget{
   Widget build(BuildContext context) {
     return
     Scaffold(
-      appBar: AppBar(
-        title: Text("Mini Projeto")
-      )
-    ); 
+      appBar: MyAppBar(_currentBrightness)
+    );
+  }
+}
+
+
+
+class MyAppBar extends StatelessWidget implements PreferredSizeWidget{
+  final ValueNotifier<Brightness> _currentBrightness;
+
+  const MyAppBar(this._currentBrightness, {super.key});
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+
+  @override
+  Widget build(BuildContext context){
+    return AppBar(
+      title: Text("Mini projeto"),
+    );
   }
 }
