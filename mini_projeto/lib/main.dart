@@ -52,7 +52,29 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget{
   @override
   Widget build(BuildContext context){
     return AppBar(
-      title: Text("Mini projeto"),
+      title: Text(
+        "Mini projeto", 
+        style: TextStyle(fontSize: 25)
+      ),
+
+      actions: [
+        PopupMenuButton<Brightness>(
+          icon: const Icon(Icons.more_vert),
+          onSelected: (Brightness brightness) {
+            _currentBrightness.value = brightness;
+          },
+          itemBuilder: (BuildContext context) => [
+            const PopupMenuItem<Brightness>(
+              value: Brightness.light,
+              child: Text('Tema Claro'),
+            ),
+            const PopupMenuItem<Brightness>(
+              value: Brightness.dark,
+              child: Text('Tema Escuro'),
+            ),
+          ],
+        ),
+      ]
     );
   }
 }
