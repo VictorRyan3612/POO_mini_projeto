@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+
 
 void main() {
-  runApp(const MainApp());
+  runApp(MainApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
+class MainApp extends HookWidget {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
+    final _currentBrightness = useState(Brightness.dark);
+
+    return MaterialApp(
+      title: 'Mudança de Tema',
+      theme: ThemeData(
+        brightness: _currentBrightness.value,
+        primarySwatch: Colors.blue,
       ),
-    );
+      home: Text("Processo de mudança de tema")
+      );
+    
   }
 }
+
