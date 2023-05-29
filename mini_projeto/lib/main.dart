@@ -17,9 +17,26 @@ class MainApp extends HookWidget {
         brightness: _currentBrightness.value,
         primarySwatch: Colors.blue,
       ),
-      home: Text("Processo de mudança de tema")
+      home: HomePageApp(_currentBrightness)
       );
     
   }
 }
 
+
+class HomePageApp extends HookWidget{
+  final ValueNotifier<Brightness> _currentBrightness;
+
+  const HomePageApp(this._currentBrightness, {super.key});
+
+
+  @override
+  Widget build(BuildContext context) {
+    return
+    Scaffold(
+      appBar: AppBar(
+        title: Text("Mini Projeto")
+      )
+    ); 
+  }
+}
