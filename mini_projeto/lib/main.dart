@@ -12,7 +12,9 @@ class MainApp extends HookWidget {
     final _currentBrightness = useState(Brightness.dark);
 
     return MaterialApp(
-      title: 'Mudança de Tema',
+      debugShowCheckedModeBanner: false,
+
+      title: 'Jogos Grátis',
       theme: ThemeData(
         brightness: _currentBrightness.value,
         primarySwatch: Colors.blue,
@@ -53,7 +55,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget{
   Widget build(BuildContext context){
     return AppBar(
       title: Text(
-        "Mini projeto", 
+        "Lista de jogos grátis", 
         style: TextStyle(fontSize: 25)
       ),
 
@@ -78,3 +80,5 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget{
     );
   }
 }
+
+
