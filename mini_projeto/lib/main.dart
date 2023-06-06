@@ -159,36 +159,55 @@ class GameDetailsScreen extends StatelessWidget {
         title: Text(game["title"]),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        
+        child: Row(
+          mainAxisAlignment:MainAxisAlignment.center ,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Game Details:',
-                style: TextStyle(fontSize: 24),
-              ),
+            Image.network(
+              game['thumbnail'],
+              height: 200,
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Image.network(
-                game['thumbnail'],
-                height: 200,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Title: ${game['title']}',
-                style: TextStyle(fontSize: 18),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Genre: ${game['genre']}',
-                style: TextStyle(fontSize: 18),
-              ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: gamesinfo.map((item) {
+                return Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: 
+                    Text('${item['nameProp']} ${game[item['prop']]}', 
+                      style: TextStyle(fontSize: item['fontsize'])
+                    )
+                );
+              }).toList()
+
+              //   Padding(
+              //     padding: const EdgeInsets.all(8.0),
+              //     child: Text(
+              //       'Game Details:',
+              //       style: TextStyle(fontSize: 24),
+              //     ),
+              //   ),
+              //   Padding(
+              //     padding: const EdgeInsets.all(8.0),
+              //     child: Image.network(
+              //       game['thumbnail'],
+              //       height: 200,
+              //     ),
+              //   ),
+              //   Padding(
+              //     padding: const EdgeInsets.all(8.0),
+              //     child: Text(
+              //       'Title: ${game['title']}',
+              //       style: TextStyle(fontSize: 18),
+              //     ),
+              //   ),
+              //   Padding(
+              //     padding: const EdgeInsets.all(8.0),
+              //     child: Text(
+              //       'Genre: ${game['genre']}',
+              //       style: TextStyle(fontSize: 18),
+              //     ),
+              //   ),
+              // ],
             ),
           ],
         ),
@@ -196,3 +215,13 @@ class GameDetailsScreen extends StatelessWidget {
     );
   }
 }
+
+final List<Map<String, dynamic>> gamesinfo = [
+  
+  {
+    'nameProp': 'Title:',
+    'prop': 'title',
+    'fontsize': 18.0,
+    'height': 16.0
+  }
+];
