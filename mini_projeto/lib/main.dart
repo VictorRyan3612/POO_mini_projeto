@@ -113,14 +113,16 @@ class GamesList extends HookWidget {
       fetchData();
     }, []);
     if (fim.value == "Sucesso"){
-      return ListView(
-        children: List.generate(games.value.length, (index) {
+      return ListView.builder(
+        itemCount: games.value.length,
+        itemBuilder: (BuildContext context, int index) {
           final game = games.value[index];
           return ListTile(
             title: Text(game['title']),
             subtitle: Text(game['genre']),
+
           );
-        }),
+        }
       );
     }
 
