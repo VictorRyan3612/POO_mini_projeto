@@ -106,36 +106,6 @@ class GameDetailsScreen extends StatelessWidget {
                     )
                 );
               }).toList()
-
-              //   Padding(
-              //     padding: const EdgeInsets.all(8.0),
-              //     child: Text(
-              //       'Game Details:',
-              //       style: TextStyle(fontSize: 24),
-              //     ),
-              //   ),
-              //   Padding(
-              //     padding: const EdgeInsets.all(8.0),
-              //     child: Image.network(
-              //       game['thumbnail'],
-              //       height: 200,
-              //     ),
-              //   ),
-              //   Padding(
-              //     padding: const EdgeInsets.all(8.0),
-              //     child: Text(
-              //       'Title: ${game['title']}',
-              //       style: TextStyle(fontSize: 18),
-              //     ),
-              //   ),
-              //   Padding(
-              //     padding: const EdgeInsets.all(8.0),
-              //     child: Text(
-              //       'Genre: ${game['genre']}',
-              //       style: TextStyle(fontSize: 18),
-              //     ),
-              //   ),
-              // ],
             ),
           ],
         ),
