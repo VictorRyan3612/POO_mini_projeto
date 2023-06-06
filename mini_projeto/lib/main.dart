@@ -128,7 +128,7 @@ class GamesList extends HookWidget {
 
     else{
       return Center(
-        child: Text("Error: ${fim.value}",style: TextStyle(fontSize: 20))
+        child: CircularProgressIndicator(),
       );
     }
     
