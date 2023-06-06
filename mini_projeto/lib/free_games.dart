@@ -32,6 +32,7 @@ class FreeGames extends HookWidget {
 
     useEffect(() {
       fetchData();
+      return null;
     }, []);
 
 
@@ -43,7 +44,7 @@ class FreeGames extends HookWidget {
       
       return Scaffold(
         appBar: AppBar(
-          title: Text("Lista de jogos Grátis"),
+          title: const Text("Lista de jogos Grátis"),
         ),
         body: Center(
           child: ListView.builder(
@@ -70,7 +71,7 @@ class FreeGames extends HookWidget {
     }
 
     else{
-      return Center(
+      return const Center(
         child: CircularProgressIndicator(),
       );
     }
@@ -81,6 +82,8 @@ class FreeGames extends HookWidget {
 
 
 class FreeGameDetailsScreen extends StatelessWidget {
+  const FreeGameDetailsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final dynamic game = ModalRoute.of(context)?.settings.arguments;

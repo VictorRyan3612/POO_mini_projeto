@@ -37,8 +37,8 @@ class MainApp extends HookWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const DashboardMenu(),
-        '/FreeGames':(context) => FreeGames(),
-        '/freeGames/gameDetails': (context) => FreeGameDetailsScreen(),
+        '/FreeGames':(context) => const FreeGames(),
+        '/freeGames/gameDetails': (context) => const FreeGameDetailsScreen(),
         '/Configs':(context) => TelaConfigs(currentBrightness: currentBrightness),
       },
     );
