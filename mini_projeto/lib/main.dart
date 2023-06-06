@@ -156,6 +156,32 @@ class GameDetailsScreen extends StatelessWidget {
     final dynamic game = ModalRoute.of(context)?.settings.arguments;
     return Scaffold(
       appBar: AppBar(
+        title: Text(game["title"]),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Game Details:',
+              style: TextStyle(fontSize: 24),
+            ),
+            SizedBox(height: 16),
+            Image.network(
+              game['thumbnail'],
+              height: 200,
+            ),
+            SizedBox(height: 16),
+            Text(
+              'Title: ${game['title']}',
+              style: TextStyle(fontSize: 18),
+            ),
+            Text(
+              'Genre: ${game['genre']}',
+              style: TextStyle(fontSize: 18),
+            ),
+          ],
+        ),
       ),
     );
   }
