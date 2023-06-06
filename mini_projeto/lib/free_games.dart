@@ -94,25 +94,31 @@ class FreeGameDetailsScreen extends StatelessWidget {
         child: Row(
           mainAxisAlignment:MainAxisAlignment.center ,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.network(
-                game['thumbnail'],
-                height: 200,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  game['thumbnail'],
+                  height: 200,
+                ),
               ),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: gamesinfo.map((item) {
-
-                return Padding(
-                  padding: const EdgeInsets.all(5),
-                  child: 
-                    Text('${item['nameProp']} \t${game[item['prop']]}',
-                      style: TextStyle(fontSize: item['fontsize'])
-                    )
-                );
-              }).toList()
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: gamesinfo.map((item) {
+            
+                  return Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: 
+                      Text('${item['nameProp']} \t${game[item['prop']]}',
+                        style: TextStyle(fontSize: item['fontsize'])
+                      )
+                  );
+                }).toList()
+              ),
             ),
           ],
         ),
