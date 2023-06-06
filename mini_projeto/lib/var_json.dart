@@ -1,7 +1,7 @@
 final List<Map<String, dynamic>> menuItens = [
   {
-    'title': 'Midias',
-    'rota': '/ModMid'
+    'title': 'Jogos Grátis',
+    'rota': '/FreeGames'
   },
   {
     'title': 'Configurações',
