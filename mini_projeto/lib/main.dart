@@ -90,36 +90,33 @@ class GamesList extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    var fim = useState("Não testado");
+    final fim = useState("Não testado");
+    final games = useState<List<dynamic>>([]);
 
     Future<void> fetchData() async {
-      var gamesUri = Uri(
-        scheme: 'https',
-        host: 'freetogame.com',
-        path: 'api/games',
-      );
-
       try {
-        var jsonString = await http.read(gamesUri);
-        var uriJson = jsonDecode(jsonString);
+        final response = await http.get(Uri.parse('https://www.freetogame.com/api/games'));
+        
+        final jsonResponse = jsonDecode(response.body);
+        games.value = jsonResponse;
         fim.value = "Sucesso";
       } 
-
       catch (error) {
         var a = error.runtimeType.toString();
-        fim.value = "Erro $a";
+        fim.value = "Erro: $a";
       }
-    }
 
-    fetchData();
+    }
+    
+
+    useEffect(() {
+      fetchData();
+    }, []);
     
     return Center(
       child:
         Text("${fim.value}", style: TextStyle(fontSize: 20),)
-
     );
-
-
 
   }
 }
