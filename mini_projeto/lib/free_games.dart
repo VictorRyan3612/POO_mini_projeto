@@ -35,9 +35,9 @@ class FreeGames extends HookWidget {
     }, []);
 
 
-    // void navigateToGameDetails(BuildContext context, dynamic game) {
-    //   Navigator.pushNamed(context, '/freeGames/gameDetails', arguments: game);
-    // }
+    void navigateToGameDetails(BuildContext context, dynamic game) {
+      Navigator.pushNamed(context, '/freeGames/gameDetails', arguments: game);
+    }
 
     if (fim.value == "Sucesso"){
       
@@ -53,7 +53,7 @@ class FreeGames extends HookWidget {
 
               return InkWell(
                 onLongPress: () => print(game),
-                // onTap: () => navigateToGameDetails(context, game),
+                onTap: () => navigateToGameDetails(context, game),
                 child: ListTile(
                   title: Text(game['title']),
                   subtitle: Text(game['genre']),
@@ -76,5 +76,47 @@ class FreeGames extends HookWidget {
     }
     
 
+  }
+}
+
+
+class FreeGameDetailsScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final dynamic game = ModalRoute.of(context)?.settings.arguments;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(game["title"]),
+      ),
+      body: Center(
+        
+        child: Row(
+          mainAxisAlignment:MainAxisAlignment.center ,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.network(
+                game['thumbnail'],
+                height: 200,
+              ),
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: gamesinfo.map((item) {
+
+                return Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: 
+                    Text('${item['nameProp']} \t${game[item['prop']]}',
+                      style: TextStyle(fontSize: item['fontsize'])
+                    )
+                );
+              }).toList()
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
