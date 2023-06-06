@@ -20,7 +20,11 @@ class MainApp extends HookWidget {
         brightness: _currentBrightness.value,
         primarySwatch: Colors.blue,
       ),
-      home: HomePageApp(_currentBrightness)
+      home: HomePageApp(_currentBrightness),
+      
+      routes: {
+        '/gameDetails': (context) => GameDetailsScreen(),
+      },
       );
     
   }
@@ -113,15 +117,18 @@ class GamesList extends HookWidget {
       fetchData();
     }, []);
 
+
+    void navigateToGameDetails(BuildContext context, dynamic game) {
+      Navigator.pushNamed(context, '/gameDetails', arguments: game);
+    }
+
     if (fim.value == "Sucesso"){
       return ListView.builder(
         itemCount: games.value.length,
         itemBuilder: (BuildContext context, int index) {
           final game = games.value[index];
           return InkWell(
-            onTap: () {
-              
-            },
+            onTap: () => navigateToGameDetails(context, game),
             child: ListTile(
               title: Text(game['title']),
               subtitle: Text(game['genre']),
@@ -142,3 +149,14 @@ class GamesList extends HookWidget {
   }
 }
 
+
+class GameDetailsScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final dynamic game = ModalRoute.of(context)?.settings.arguments;
+    return Scaffold(
+      appBar: AppBar(
+      ),
+    );
+  }
+}
