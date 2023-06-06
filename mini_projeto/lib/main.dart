@@ -112,6 +112,7 @@ class GamesList extends HookWidget {
     useEffect(() {
       fetchData();
     }, []);
+    
     if (fim.value == "Sucesso"){
       return ListView.builder(
         itemCount: games.value.length,
@@ -120,7 +121,7 @@ class GamesList extends HookWidget {
           return ListTile(
             title: Text(game['title']),
             subtitle: Text(game['genre']),
-
+            leading: Image.network(game['thumbnail']),
           );
         }
       );
