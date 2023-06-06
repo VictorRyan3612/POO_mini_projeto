@@ -112,16 +112,21 @@ class GamesList extends HookWidget {
     useEffect(() {
       fetchData();
     }, []);
-    
+
     if (fim.value == "Sucesso"){
       return ListView.builder(
         itemCount: games.value.length,
         itemBuilder: (BuildContext context, int index) {
           final game = games.value[index];
-          return ListTile(
-            title: Text(game['title']),
-            subtitle: Text(game['genre']),
-            leading: Image.network(game['thumbnail']),
+          return InkWell(
+            onTap: () {
+              
+            },
+            child: ListTile(
+              title: Text(game['title']),
+              subtitle: Text(game['genre']),
+              leading: Image.network(game['thumbnail']),
+            ),
           );
         }
       );
@@ -136,3 +141,4 @@ class GamesList extends HookWidget {
 
   }
 }
+
