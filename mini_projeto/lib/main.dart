@@ -1,91 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'free_games.dart';
+
+import 'modulo_midias.dart';
+import 'dashboard_menu.dart';
+import 'tela_config.dart';
 
 
 
 void main() {
-  runApp(MainApp());
+  runApp(const MainApp());
 }
 
 class MainApp extends HookWidget {
+  const MainApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    final _currentBrightness = useState(Brightness.dark);
+    final currentBrightness = useState(Brightness.dark);
+    
+    final darkTheme = ThemeData(
+      brightness: Brightness.dark,
+      scaffoldBackgroundColor: const Color.fromARGB(255, 27, 27, 27)
+    );
+    final lightTheme = ThemeData(
+      brightness: Brightness.light,
+      primarySwatch: Colors.blue,
+      scaffoldBackgroundColor: const Color.fromARGB(255, 175, 175, 175)
+    );
 
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-
-      title: 'Jogos Grátis',
-      theme: ThemeData(
-        brightness: _currentBrightness.value,
-        primarySwatch: Colors.blue,
-      ),
-      home: HomePageApp(_currentBrightness),
+      debugShowCheckedModeBanner:false,
       
+      theme: currentBrightness.value == Brightness.dark ? darkTheme : lightTheme,
+
+      
+      initialRoute: '/',
       routes: {
-        '/freeGames/gameDetails': (context) => GameDetailsScreen(),
+        '/': (context) => const DashboardMenu(),
+        '/ModMid':(context) => const ModuloMidia(),
+        '/Configs':(context) => TelaConfigs(currentBrightness: currentBrightness),
       },
     );
-    
   }
 }
-
-
-class HomePageApp extends HookWidget{
-  final ValueNotifier<Brightness> _currentBrightness;
-
-  const HomePageApp(this._currentBrightness, {super.key});
-
-
-  @override
-  Widget build(BuildContext context) {
-    return
-    Scaffold(
-      appBar: MyAppBar(_currentBrightness),
-
-      body: GamesList(),
-    );
-  }
-}
-
-
-
-class MyAppBar extends StatelessWidget implements PreferredSizeWidget{
-  final ValueNotifier<Brightness> _currentBrightness;
-
-  const MyAppBar(this._currentBrightness, {super.key});
-
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
-
-  @override
-  Widget build(BuildContext context){
-    return AppBar(
-      title: Text(
-        "Lista de jogos grátis", 
-        style: TextStyle(fontSize: 25)
-      ),
-
-      actions: [
-        PopupMenuButton<Brightness>(
-          icon: const Icon(Icons.more_vert),
-          onSelected: (Brightness brightness) {
-            _currentBrightness.value = brightness;
-          },
-          itemBuilder: (BuildContext context) => [
-            const PopupMenuItem<Brightness>(
-              value: Brightness.light,
-              child: Text('Tema Claro'),
-            ),
-            const PopupMenuItem<Brightness>(
-              value: Brightness.dark,
-              child: Text('Tema Escuro'),
-            ),
-          ],
-        ),
-      ]
-    );
-  }
-}
-
