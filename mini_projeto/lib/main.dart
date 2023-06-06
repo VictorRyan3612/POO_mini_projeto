@@ -171,9 +171,9 @@ class GameDetailsScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: gamesinfo.map((item) {
                 return Padding(
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(5),
                   child: 
-                    Text('${item['nameProp']} ${game[item['prop']]}', 
+                    Text('${item['nameProp']} \t${game[item['prop']]}',
                       style: TextStyle(fontSize: item['fontsize'])
                     )
                 );
@@ -223,5 +223,36 @@ final List<Map<String, dynamic>> gamesinfo = [
     'prop': 'title',
     'fontsize': 18.0,
     'height': 16.0
-  }
+  },
+  {
+    'nameProp': 'Genero:',
+    'prop': 'genre',
+    'fontsize': 18.0,
+    'height': 16.0
+  },
+  {
+    'nameProp': 'Publicadora:',
+    'prop': 'publisher',
+    'fontsize': 18.0,
+    'height': 16.0
+  },
+  {
+    'nameProp': 'Desenvolvedora:',
+    'prop': 'developer',
+    'fontsize': 18.0,
+    'height': 16.0
+  },
+  {
+    'nameProp': 'Data de lançamento:',
+    'prop': 'release_date',
+    'fontsize': 18.0,
+    'height': 16.0
+  },
+  // {
+  //   'nameProp': 'Descrição:',
+  //   'prop': 'short_description',
+  //   'fontsize': 14.0,
+  //   'height': 16.0
+  // },
+
 ];
