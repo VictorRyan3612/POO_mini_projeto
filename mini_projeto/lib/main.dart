@@ -96,7 +96,7 @@ class GamesList extends HookWidget {
     Future<void> fetchData() async {
       try {
         final response = await http.get(Uri.parse('https://www.freetogame.com/api/games'));
-        
+
         final jsonResponse = jsonDecode(response.body);
         games.value = jsonResponse;
         fim.value = "Sucesso";
@@ -112,11 +112,24 @@ class GamesList extends HookWidget {
     useEffect(() {
       fetchData();
     }, []);
+    if (fim.value == "Sucesso"){
+      return ListView(
+        children: List.generate(games.value.length, (index) {
+          final game = games.value[index];
+          return ListTile(
+            title: Text(game['title']),
+            subtitle: Text(game['genre']),
+          );
+        }),
+      );
+    }
+
+    else{
+      return Center(
+        child: Text("Error: ${fim.value}",style: TextStyle(fontSize: 20))
+      );
+    }
     
-    return Center(
-      child:
-        Text("${fim.value}", style: TextStyle(fontSize: 20),)
-    );
 
   }
 }
