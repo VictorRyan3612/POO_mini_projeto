@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'var_json.dart';
+import 'dataservice.dart';
 
 class FreeGames extends HookWidget {
   const FreeGames({super.key});
@@ -31,7 +32,7 @@ class FreeGames extends HookWidget {
     
 
     useEffect(() {
-      fetchData();
+      dataService.fetchFreeGamesData();
       return null;
     }, []);
 
@@ -39,46 +40,63 @@ class FreeGames extends HookWidget {
     void navigateToGameDetails(BuildContext context, dynamic game) {
       Navigator.pushNamed(context, '/freeGames/gameDetails', arguments: game);
     }
+    return
+    ValueListenableBuilder(
+      valueListenable: dataService.gameStateNotifier,
+      builder: (_, value, __) {
+        switch (value['status']) {
 
-    if (fim.value == "Sucesso"){
-      
-      return SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            title: const Text("Lista de jogos Grátis"),
-          ),
-          body: Center(
-            child: ListView.builder(
-              itemCount: games.value.length,
-              itemBuilder: (BuildContext context, int index) {
-                final game = games.value[index];
-      
-                return InkWell(
-                  onLongPress: () => print(game),
-                  onTap: () => navigateToGameDetails(context, game),
-                  child: ListTile(
-                    title: Text(game['title']),
-                    subtitle: Text(game['genre']),
-                    leading: ClipRRect(
-                      borderRadius: BorderRadius.circular(5),
-                      child: Image.network(game['thumbnail'])
-                    ),
+          case StatusApp.loading:
+            return Scaffold(
+                appBar: AppBar(
+                  title: const Text("Carregando")
+                ),
+                body: const Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+
+          case StatusApp.idle:
+            return const Text("...");
+
+          case StatusApp.ready:
+            return SafeArea(
+              child: Scaffold(
+                appBar: AppBar(
+                  title: const Text("Lista de jogos Grátis"),
+                ),
+                body: Center(
+                  child: ListView.builder(
+                    itemCount: games.value.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final game = games.value[index];
+            
+                      return InkWell(
+                        onLongPress: () => print(game),
+                        onTap: () => navigateToGameDetails(context, game),
+                        child: ListTile(
+                          title: Text(game['title']),
+                          subtitle: Text(game['genre']),
+                          leading: ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: Image.network(game['thumbnail'])
+                          ),
+                        ),
+                      );
+                    }
                   ),
-                );
-              }
-            ),
-          )
-        ),
-      );
-    }
-
-    else{
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
-    }
-    
-
+                )
+              ),
+            );
+          case StatusApp.error:
+            return 
+            const Center(
+              child: Text("error")
+            );
+        }
+        return const Text("Erro desconhecido" ''); 
+      }
+    );
   }
 }
 
