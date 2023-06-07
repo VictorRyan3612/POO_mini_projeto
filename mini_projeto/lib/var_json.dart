@@ -4,6 +4,10 @@ final List<Map<String, dynamic>> menuItens = [
     'rota': '/FreeGames'
   },
   {
+    'title': 'Jogos em Promoção',
+    'rota': '/SalesGames'
+  },
+  {
     'title': 'Configurações',
     'rota': '/Configs'
   },

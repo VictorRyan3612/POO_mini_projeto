@@ -4,7 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'free_games.dart';
 import 'dashboard_menu.dart';
 import 'tela_config.dart';
-
+import 'sale_games.dart';
 
 
 void main() {
@@ -39,6 +39,7 @@ class MainApp extends HookWidget {
         '/': (context) => const DashboardMenu(),
         '/FreeGames':(context) => const FreeGames(),
         '/freeGames/gameDetails': (context) => const FreeGameDetailsScreen(),
+        '/SalesGames':(context) => const SaleGames(),
         '/Configs':(context) => TelaConfigs(currentBrightness: currentBrightness),
       },
     );
