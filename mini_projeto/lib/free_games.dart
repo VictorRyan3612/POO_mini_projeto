@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'var_json.dart';
 import 'dataservice.dart';
@@ -12,25 +10,7 @@ class FreeGames extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fim = useState("Não testado");
-    final games = useState<List<dynamic>>([]);
-
-    Future<void> fetchData() async {
-      try {
-        final response = await http.get(Uri.parse('https://www.freetogame.com/api/games'));
-
-        final jsonResponse = jsonDecode(response.body);
-        games.value = jsonResponse;
-        fim.value = "Sucesso";
-      } 
-      catch (error) {
-        var a = error.runtimeType.toString();
-        fim.value = "Erro: $a";
-      }
-
-    }
     
-
     useEffect(() {
       dataService.fetchFreeGamesData();
       return null;
@@ -60,6 +40,7 @@ class FreeGames extends HookWidget {
             return const Text("...");
 
           case StatusApp.ready:
+            List games = value['games'];
             return SafeArea(
               child: Scaffold(
                 appBar: AppBar(
@@ -67,9 +48,9 @@ class FreeGames extends HookWidget {
                 ),
                 body: Center(
                   child: ListView.builder(
-                    itemCount: games.value.length,
+                    itemCount: games.length,
                     itemBuilder: (BuildContext context, int index) {
-                      final game = games.value[index];
+                      final game = games[index];
             
                       return InkWell(
                         onLongPress: () => print(game),
@@ -94,7 +75,7 @@ class FreeGames extends HookWidget {
               child: Text("error")
             );
         }
-        return const Text("Erro desconhecido" ''); 
+        return const Text("Erro desconhecido"); 
       }
     );
   }
