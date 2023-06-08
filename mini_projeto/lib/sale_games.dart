@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'var_json.dart';
 
+import 'dataservice.dart';
+
 class SaleGames extends HookWidget {
 const SaleGames({ Key? key }) : super(key: key);
 
@@ -41,32 +43,57 @@ const SaleGames({ Key? key }) : super(key: key);
     void navigateToGameDetails(BuildContext context, dynamic game) {
       Navigator.pushNamed(context, '/SalesGames/gameDetails', arguments: game);
     }
-    return Scaffold(
-      appBar: AppBar(
-          title: const Text("Lista de jogos Grátis"),
-        ),
-        body: Center(
-          child: ListView.builder(
-            itemCount: games.value.length,
-            itemBuilder: (BuildContext context, int index) {
-              final game = games.value[index];
+    return
+    ValueListenableBuilder(
+      valueListenable: dataService.gameStateNotifier,
+      builder: (_, value, __) {
+        switch (value['status']) {
 
-              return InkWell(
-                onLongPress: () => print(game),
-                onTap: () => navigateToGameDetails(context, game),
-                child: ListTile(
-                  title: Text(game['title']),
-                  subtitle: Text(game['normalPrice']),
-                  leading: ClipRRect(
-                    borderRadius: BorderRadius.circular(5),
-                    child: Image.network(game['thumb'])
-                  ),
+          case StatusApp.idle:
+            return const Text("...");
+
+          case StatusApp.loading:
+            return Scaffold(
+                appBar: AppBar(
+                  title: const Text("Carregando")
+                ),
+                body: const Center(
+                  child: CircularProgressIndicator(),
                 ),
               );
-            }
-          ),
-        )
+          case StatusApp.ready:
+            return Scaffold(
+              appBar: AppBar(
+                  title: const Text("Lista de jogos Grátis"),
+                ),
+                body: Center(
+                  child: ListView.builder(
+                    itemCount: games.value.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final game = games.value[index];
+
+                      return InkWell(
+                        onLongPress: () => print(game),
+                        onTap: () => navigateToGameDetails(context, game),
+                        child: ListTile(
+                          title: Text(game['title']),
+                          subtitle: Text(game['normalPrice']),
+                          leading: ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: Image.network(game['thumb'])
+                          ),
+                        ),
+                      );
+                    }
+                  ),
+                )
+              );
+        }
+        return const Text("Erro desconhecido");
+      }
     );
+    
+    
   }
 }
 
