@@ -44,7 +44,7 @@ const SaleGames({ Key? key }) : super(key: key);
             List games = value['games'];
             return Scaffold(
               appBar: AppBar(
-                  title: const Text("Lista de jogos Grátis"),
+                  title: const Text("Jogos em Promoção"),
                 ),
                 body: Center(
                   child: ListView.builder(
@@ -57,7 +57,7 @@ const SaleGames({ Key? key }) : super(key: key);
                         onTap: () => navigateToGameDetails(context, game),
                         child: ListTile(
                           title: Text(game['title']),
-                          subtitle: Text(game['normalPrice']),
+                          subtitle: Text('USD ${game['normalPrice']}'),
                           leading: ClipRRect(
                             borderRadius: BorderRadius.circular(5),
                             child: Image.network(game['thumb'])
