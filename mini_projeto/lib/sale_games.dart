@@ -4,36 +4,16 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'var_json.dart';
 
+import 'dataservice.dart';
+
 class SaleGames extends HookWidget {
 const SaleGames({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context){
-
-
-
-
-    final fim = useState("Não testado");
-    final games = useState<List<dynamic>>([]);
-
-    Future<void> fetchData() async {
-      try {
-        final response = await http.get(Uri.parse('https://www.cheapshark.com/api/1.0/deals?storeID=1'));
-
-        final jsonResponse = jsonDecode(response.body);
-        games.value = jsonResponse;
-        fim.value = "Sucesso";
-      } 
-      catch (error) {
-        var a = error.runtimeType.toString();
-        fim.value = "Erro: $a";
-      }
-
-    }
-    
-
+  
     useEffect(() {
-      fetchData();
+      dataService.fetchSalesGamesData();
       return null;
     }, []);
 
@@ -41,32 +21,63 @@ const SaleGames({ Key? key }) : super(key: key);
     void navigateToGameDetails(BuildContext context, dynamic game) {
       Navigator.pushNamed(context, '/SalesGames/gameDetails', arguments: game);
     }
-    return Scaffold(
-      appBar: AppBar(
-          title: const Text("Lista de jogos Grátis"),
-        ),
-        body: Center(
-          child: ListView.builder(
-            itemCount: games.value.length,
-            itemBuilder: (BuildContext context, int index) {
-              final game = games.value[index];
+    return
+    ValueListenableBuilder(
+      valueListenable: dataService.gameStateNotifier,
+      builder: (_, value, __) {
+        switch (value['status']) {
 
-              return InkWell(
-                onLongPress: () => print(game),
-                onTap: () => navigateToGameDetails(context, game),
-                child: ListTile(
-                  title: Text(game['title']),
-                  subtitle: Text(game['normalPrice']),
-                  leading: ClipRRect(
-                    borderRadius: BorderRadius.circular(5),
-                    child: Image.network(game['thumb'])
-                  ),
+          case StatusApp.idle:
+            return const Text("...");
+
+          case StatusApp.loading:
+            return Scaffold(
+                appBar: AppBar(
+                  title: const Text("Carregando")
+                ),
+                body: const Center(
+                  child: CircularProgressIndicator(),
                 ),
               );
-            }
-          ),
-        )
+              
+          case StatusApp.ready:
+            List games = value['games'];
+            return Scaffold(
+              appBar: AppBar(
+                  title: const Text("Jogos em Promoção"),
+                ),
+                body: Center(
+                  child: ListView.builder(
+                    itemCount: games.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final game = games[index];
+
+                      return InkWell(
+                        onLongPress: () => print(game),
+                        onTap: () => navigateToGameDetails(context, game),
+                        child: ListTile(
+                          title: Text(game['title']),
+                          subtitle: Text('USD ${game['normalPrice']}'),
+                          leading: ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: Image.network(game['thumb'])
+                          ),
+                        ),
+                      );
+                    }
+                  ),
+                )
+              );
+          case StatusApp.error:
+            return const Center(
+                child: Text("error")
+              );
+        }
+        return const Text("Erro desconhecido");
+      }
     );
+    
+    
   }
 }
 
@@ -83,38 +94,42 @@ class SaleGamesDetailsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(game["title"]),
       ),
-      body: Center(
+      body: SafeArea(
         
-        child: Row(
-          mainAxisAlignment:MainAxisAlignment.center ,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.network(
-                  game['thumb'],
-                  height: 200,
+        child: Center(
+          
+          child: Column(
+            mainAxisAlignment:MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.network(
+                    game['thumb'],
+                    height: 200,
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: gamesinfo.map((item) {
-            
-                  return Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: 
-                      Text('${item['nameProp']} \t${game[item['prop']]}',
-                        style: TextStyle(fontSize: item['fontsize'])
-                      )
-                  );
-                }).toList()
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: gamesinfo.map((item) {
+              
+                    return Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: 
+                        Text('${item['nameProp']} \t${game[item['prop']]}',
+                          style: TextStyle(fontSize: item['fontsize'])
+                        )
+                    );
+                  }).toList()
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
