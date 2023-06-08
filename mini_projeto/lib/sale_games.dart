@@ -11,31 +11,9 @@ const SaleGames({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context){
-
-
-
-
-    final fim = useState("Não testado");
-    final games = useState<List<dynamic>>([]);
-
-    Future<void> fetchData() async {
-      try {
-        final response = await http.get(Uri.parse('https://www.cheapshark.com/api/1.0/deals?storeID=1'));
-
-        final jsonResponse = jsonDecode(response.body);
-        games.value = jsonResponse;
-        fim.value = "Sucesso";
-      } 
-      catch (error) {
-        var a = error.runtimeType.toString();
-        fim.value = "Erro: $a";
-      }
-
-    }
-    
-
+  
     useEffect(() {
-      fetchData();
+      dataService.fetchSalesGamesData();
       return null;
     }, []);
 
@@ -61,16 +39,18 @@ const SaleGames({ Key? key }) : super(key: key);
                   child: CircularProgressIndicator(),
                 ),
               );
+              
           case StatusApp.ready:
+            List games = value['games'];
             return Scaffold(
               appBar: AppBar(
                   title: const Text("Lista de jogos Grátis"),
                 ),
                 body: Center(
                   child: ListView.builder(
-                    itemCount: games.value.length,
+                    itemCount: games.length,
                     itemBuilder: (BuildContext context, int index) {
-                      final game = games.value[index];
+                      final game = games[index];
 
                       return InkWell(
                         onLongPress: () => print(game),
@@ -87,6 +67,10 @@ const SaleGames({ Key? key }) : super(key: key);
                     }
                   ),
                 )
+              );
+          case StatusApp.error:
+            return const Center(
+                child: Text("error")
               );
         }
         return const Text("Erro desconhecido");
