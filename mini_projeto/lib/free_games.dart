@@ -20,8 +20,7 @@ class FreeGames extends HookWidget {
     void navigateToGameDetails(BuildContext context, dynamic game) {
       Navigator.pushNamed(context, '/freeGames/gameDetails', arguments: game);
     }
-    return
-    ValueListenableBuilder(
+    return ValueListenableBuilder(
       valueListenable: dataService.gameStateNotifier,
       builder: (_, value, __) {
         switch (value['status']) {
@@ -46,26 +45,37 @@ class FreeGames extends HookWidget {
                 appBar: AppBar(
                   title: const Text("Lista de jogos Grátis"),
                 ),
-                body: Center(
-                  child: ListView.builder(
-                    itemCount: games.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final game = games[index];
-            
-                      return InkWell(
-                        onLongPress: () => print(game),
-                        onTap: () => navigateToGameDetails(context, game),
-                        child: ListTile(
-                          title: Text(game['title']),
-                          subtitle: Text(game['genre']),
-                          leading: ClipRRect(
-                            borderRadius: BorderRadius.circular(5),
-                            child: Image.network(game['thumbnail'])
-                          ),
+                body: Column (
+                  children: [
+                    Expanded(
+                      child: Center(
+                        child: Text("Formulario")
+                      )
+                    ),
+                    Expanded(
+                      child: Center(
+                        child: ListView.builder(
+                          itemCount: games.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final game = games[index];
+                                
+                            return InkWell(
+                              onLongPress: () => print(game),
+                              onTap: () => navigateToGameDetails(context, game),
+                              child: ListTile(
+                                title: Text(game['title']),
+                                subtitle: Text(game['genre']),
+                                leading: ClipRRect(
+                                  borderRadius: BorderRadius.circular(5),
+                                  child: Image.network(game['thumbnail'])
+                                ),
+                              ),
+                            );
+                          }
                         ),
-                      );
-                    }
-                  ),
+                      ),
+                    ),
+                  ],
                 )
               ),
             );
