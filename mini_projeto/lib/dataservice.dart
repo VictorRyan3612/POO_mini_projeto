@@ -15,18 +15,29 @@ class DataService{
 
 
 
-  Future<void> fetchFreeGamesData({String filter = ''}) async {
+  Future<void> fetchFreeGamesData({String filter = '', String ordem = ''}) async {
     try {
       gameStateNotifier.value = {
         'status': StatusApp.loading
       };
       var response = null;
+      var url = 'https://www.freetogame.com/api/games?';
+
       if (filter == ''){
-        response = await http.get(Uri.parse('https://www.freetogame.com/api/games'));
+        response = await http.get(Uri.parse('$url'));
 
       }
       else{
-        response = await http.get(Uri.parse('https://www.freetogame.com/api/games?category=$filter'));
+        url = url + '&category=$filter&';
+        response = await http.get(Uri.parse('$url'));
+      }
+      
+      if (ordem == ''){
+        response = await http.get(Uri.parse('$url'));
+      }
+      else{
+        url = url + '&sort-by=$ordem&';
+        response = await http.get(Uri.parse('$url'));
       }
       final jsonResponse = jsonDecode(response.body);
 
