@@ -50,11 +50,21 @@ class FreeGames extends HookWidget {
                 ),
                 body: Column (
                   children: [
-                    Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Center(
-                        child: MyFreeGamesForm(),
-                      )
+                    
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Center(
+                              child: MyFreeGamesForm(),
+                            )
+                          ),
+                        ),
+                        Expanded(
+                          child: Center(child: Text("Teste de ordenação"))
+                        )
+                      ],
                     ),
                     Expanded(
                       child: Center(
