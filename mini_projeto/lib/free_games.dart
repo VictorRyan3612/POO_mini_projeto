@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'var_json.dart';
 import 'dataservice.dart';
+import 'form.dart';
+
+
 
 class FreeGames extends HookWidget {
   const FreeGames({super.key});
@@ -47,9 +50,10 @@ class FreeGames extends HookWidget {
                 ),
                 body: Column (
                   children: [
-                    Expanded(
+                    Padding(
+                      padding: EdgeInsets.all(10),
                       child: Center(
-                        child: Text("Formulario")
+                        child: MyCustomForm(),
                       )
                     ),
                     Expanded(
