@@ -54,3 +54,38 @@ class MyCustomForm extends HookWidget {
     );
   }
 }
+
+@immutable
+class MySteamForm extends HookWidget {
+  
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      child:  Column(
+        children: [
+          DropdownButtonFormField<String>(
+            decoration: const InputDecoration(labelText: 'Ordenar'),
+            onChanged: (ordenar) {
+              dataService.fetchSalesGamesData(ordem: ordenar.toString());
+            },
+            
+            items: const [
+              DropdownMenuItem<String>(
+                value: 'Title',
+                child: Text('Titulo'),
+              ),
+              DropdownMenuItem<String>(
+                value: 'Price',
+                child: Text('Preço'),
+              ),
+              DropdownMenuItem<String>(
+                value: 'Metacritic',
+                child: Text('Metacritic'),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}

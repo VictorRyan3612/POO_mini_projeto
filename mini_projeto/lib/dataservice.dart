@@ -41,12 +41,23 @@ class DataService{
     print("${gameStateNotifier.value['status']}");
   }
 
-  Future<void> fetchSalesGamesData() async {
+
+
+  Future<void> fetchSalesGamesData({String ordem = ''}) async {
     try {
       gameStateNotifier.value = {
         'status': StatusApp.loading
       };
-      final response = await http.get(Uri.parse('https://www.cheapshark.com/api/1.0/deals?storeID=1'));
+
+      var response = null;
+
+      if (ordem == ''){
+        response = await http.get(Uri.parse('https://www.cheapshark.com/api/1.0/deals?storeID=1'));
+      }
+      else{
+        response = await http.get(Uri.parse('https://www.cheapshark.com/api/1.0/deals?storeID=1&sortBy=$ordem'));
+      }
+
 
       final jsonResponse = jsonDecode(response.body);
 
