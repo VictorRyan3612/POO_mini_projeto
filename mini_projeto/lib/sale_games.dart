@@ -116,7 +116,7 @@ class SaleGamesDetailsScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: gamesinfo.map((item) {
+                  children: steamGamesInfo.map((item) {
               
                     return Padding(
                       padding: const EdgeInsets.all(5),
