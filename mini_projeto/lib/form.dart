@@ -5,7 +5,7 @@ import 'package:mini_projeto/dataservice.dart';
 
 
 @immutable
-class MyCustomForm extends HookWidget {
+class MyFreeGamesForm extends HookWidget {
   
   @override
   Widget build(BuildContext context) {
@@ -19,6 +19,10 @@ class MyCustomForm extends HookWidget {
             },
             
             items: const [
+              DropdownMenuItem<String>(
+                value: '',
+                child: Text('Cancelar filtro'),
+              ),
               DropdownMenuItem<String>(
                 value: 'racing',
                 child: Text('Racing'),
@@ -70,6 +74,10 @@ class MySteamForm extends HookWidget {
             },
             
             items: const [
+              DropdownMenuItem<String>(
+                value: '',
+                child: Text('Cancelar ordenação'),
+              ),
               DropdownMenuItem<String>(
                 value: 'Title',
                 child: Text('Titulo'),

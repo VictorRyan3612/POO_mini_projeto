@@ -53,7 +53,7 @@ class FreeGames extends HookWidget {
                     Padding(
                       padding: EdgeInsets.all(10),
                       child: Center(
-                        child: MyCustomForm(),
+                        child: MyFreeGamesForm(),
                       )
                     ),
                     Expanded(
