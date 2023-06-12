@@ -13,7 +13,9 @@ class MyCustomForm extends HookWidget {
       child:  Column(
         children: [
           DropdownButtonFormField<String>(
-            onChanged: (test) {
+            decoration: const InputDecoration(labelText: 'Filtro de Gênero'),
+            onChanged: (filtro) {
+              dataService.fetchFreeGamesData(filter: filtro.toString());
             },
             
             items: const [
