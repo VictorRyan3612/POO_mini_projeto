@@ -31,6 +31,22 @@ class MyCustomForm extends HookWidget {
                 value: 'action',
                 child: Text('Action'),
               ),
+              DropdownMenuItem<String>(
+                value: 'sci-fi',
+                child: Text('Sci-fi'),
+              ),
+              DropdownMenuItem<String>(
+                value: 'fighting',
+                child: Text('Fighting'),
+              ),
+              DropdownMenuItem<String>(
+                value: 'open-world',
+                child: Text('Mundo Aberto'),
+              ),
+              DropdownMenuItem<String>(
+                value: 'anime',
+                child: Text('Anime'),
+              ),
             ],
           ),
         ],
