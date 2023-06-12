@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'var_json.dart';
+import 'form.dart';
 
 import 'dataservice.dart';
 
@@ -46,7 +47,16 @@ const SaleGames({ Key? key }) : super(key: key);
               appBar: AppBar(
                   title: const Text("Jogos em Promoção"),
                 ),
-                body: Center(
+                body: Column (
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Center(
+                        child: MySteamForm(),
+                      )
+                    ),
+                    Expanded(
+                      child: Center(
                   child: ListView.builder(
                     itemCount: games.length,
                     itemBuilder: (BuildContext context, int index) {
@@ -67,7 +77,9 @@ const SaleGames({ Key? key }) : super(key: key);
                     }
                   ),
                 )
-              );
+              )
+                ])
+            );
           case StatusApp.error:
             return const Center(
                 child: Text("error")
@@ -116,7 +128,7 @@ class SaleGamesDetailsScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: gamesinfo.map((item) {
+                  children: steamGamesInfo.map((item) {
               
                     return Padding(
                       padding: const EdgeInsets.all(5),

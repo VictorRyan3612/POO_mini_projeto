@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'var_json.dart';
 import 'dataservice.dart';
+import 'form.dart';
+
+
 
 class FreeGames extends HookWidget {
   const FreeGames({super.key});
@@ -20,8 +23,7 @@ class FreeGames extends HookWidget {
     void navigateToGameDetails(BuildContext context, dynamic game) {
       Navigator.pushNamed(context, '/freeGames/gameDetails', arguments: game);
     }
-    return
-    ValueListenableBuilder(
+    return ValueListenableBuilder(
       valueListenable: dataService.gameStateNotifier,
       builder: (_, value, __) {
         switch (value['status']) {
@@ -46,26 +48,48 @@ class FreeGames extends HookWidget {
                 appBar: AppBar(
                   title: const Text("Lista de jogos Grátis"),
                 ),
-                body: Center(
-                  child: ListView.builder(
-                    itemCount: games.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final game = games[index];
-            
-                      return InkWell(
-                        onLongPress: () => print(game),
-                        onTap: () => navigateToGameDetails(context, game),
-                        child: ListTile(
-                          title: Text(game['title']),
-                          subtitle: Text(game['genre']),
-                          leading: ClipRRect(
-                            borderRadius: BorderRadius.circular(5),
-                            child: Image.network(game['thumbnail'])
+                body: Column (
+                  children: [
+                    
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Center(
+                              child: MyFreeGamesForm(),
+                            )
                           ),
                         ),
-                      );
-                    }
-                  ),
+                        Expanded(
+                          child: Center(child: Text("Teste de ordenação"))
+                        )
+                      ],
+                    ),
+                    Expanded(
+                      child: Center(
+                        child: ListView.builder(
+                          itemCount: games.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final game = games[index];
+                                
+                            return InkWell(
+                              onLongPress: () => print(game),
+                              onTap: () => navigateToGameDetails(context, game),
+                              child: ListTile(
+                                title: Text(game['title']),
+                                subtitle: Text(game['genre']),
+                                leading: ClipRRect(
+                                  borderRadius: BorderRadius.circular(5),
+                                  child: Image.network(game['thumbnail'])
+                                ),
+                              ),
+                            );
+                          }
+                        ),
+                      ),
+                    ),
+                  ],
                 )
               ),
             );
