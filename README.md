@@ -19,3 +19,21 @@ juntamento com os requisitos de Desenvolvimento para desktop com C++:
 - SDK do Windows 10 (10.0.19041.0)
 
 Ter o git instalado
+
+
+## Procedimento:
+Selecionar uma pasta no seu computador, abrir o git bash nessa pasta,
+executar o comando: 
+<git clone https://github.com/VictorRyan3612/POO_mini_projeto.git>
+(sem <>)
+
+Após terminar, abrir a subpasta 'mini_projeto' no visual estudio code
+
+Esperar aparecer a notificação solicitando um 'pub get', ou excecutar no terminal o comando 'flutter pub get'.
+
+Tenha certeza de que esteja selecionado o dispositivo windows na parte inferior do visual code.
+
+apertar o botão start debugging em forma de triangulo na parte superior direita do visual code.
+
+Aguarde, em breve o código será compilado como um programa do windows.
+
