@@ -49,11 +49,26 @@ const SaleGames({ Key? key }) : super(key: key);
                 ),
                 body: Column (
                   children: [
-                    Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Center(
-                        child: MySteamForm(),
-                      )
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: 
+                              Center(
+                                child: Text("Filtragem"),
+                            ),
+                          )
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Center(
+                              child: MySteamForm(),
+                            )
+                          ),
+                        )
+                      ],
                     ),
                     Expanded(
                       child: Center(
