@@ -57,7 +57,7 @@ class DataService{
 
 
 
-  Future<void> fetchSalesGamesData({String filter = '', String valor ='', String ordem = ''}) async {
+  Future<void> fetchSalesGamesData({String filter = '', String valor ='15', String ordem = ''}) async {
     try {
       gameStateNotifier.value = {
         'status': StatusApp.loading
