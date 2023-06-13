@@ -61,10 +61,15 @@ class FreeGames extends HookWidget {
                                   RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15.0)
                                   )
-                                )
+                                ),
+                                backgroundColor: const MaterialStatePropertyAll(Color.fromARGB(255, 30, 70, 80))
                               ),
+
                               onPressed:() => dataService.fetchFreeGamesData(cancelar: true),
-                              child: const Text("Cancelar filtros")
+                              child: const Tooltip(
+                                message: 'Cancela o filtro e ordenação',
+                                child: Text("Cancelar filtros"),
+                              )
                             ),
                           ),
                         
@@ -76,6 +81,7 @@ class FreeGames extends HookWidget {
                             )
                           ),
                         ),
+
                         const Expanded(
                           child: Padding(
                             padding: EdgeInsets.all(10.0),
@@ -87,6 +93,7 @@ class FreeGames extends HookWidget {
                         )
                       ],
                     ),
+
                     Expanded(
                       child: Center(
                         child: ListView.builder(
@@ -115,8 +122,7 @@ class FreeGames extends HookWidget {
               ),
             );
           case StatusApp.error:
-            return 
-            const Center(
+            return const Center(
               child: Text("error")
             );
         }

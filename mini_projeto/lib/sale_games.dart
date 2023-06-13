@@ -20,8 +20,7 @@ const SaleGames({ Key? key }) : super(key: key);
     void navigateToGameDetails(BuildContext context, dynamic game) {
       Navigator.pushNamed(context, '/SalesGames/gameDetails', arguments: game);
     }
-    return
-    ValueListenableBuilder(
+    return ValueListenableBuilder(
       valueListenable: dataService.gameStateNotifier,
       builder: (_, value, __) {
         switch (value['status']) {
@@ -43,89 +42,97 @@ const SaleGames({ Key? key }) : super(key: key);
             List games = value['games'];
             return Scaffold(
               appBar: AppBar(
-                  title: const Text("Jogos em Promoção"),
-                ),
-                body: Column (
-                  children: [
-                    Row(
-                      children: [
-                        Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                shape:MaterialStatePropertyAll(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15.0)
-                                  )
+                title: const Text("Jogos em Promoção"),
+              ),
+              body: Column (
+                children: [
+                  Row(
+                    children: [
+                      Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              shape:MaterialStatePropertyAll(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0)
                                 )
                               ),
-                              onPressed:() => dataService.fetchSalesGamesData(cancelar: true),
-                              child: const Text("Cancelar filtros")
+                              backgroundColor: const MaterialStatePropertyAll(Color.fromARGB(255, 30, 70, 80))
                             ),
-                          ),
-                        const Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.all(10.0),
-                            child: 
-                              Center(
-                                child: MySteamFormFilterDrop(),
-                            ),
-                          )
-                        ),
-                        const Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.all(10.0),
-                            child: 
-                              Center(
-                                child: MySteamFormFilterValor(),
-                            ),
-                          )
-                        ),
-                        const Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.all(10),
-                            child: Center(
-                              child: MySteamFormSort(),
+
+                            onPressed:() => dataService.fetchSalesGamesData(cancelar: true),
+                            child: const Tooltip(
+                              message: 'Cancela o filtro e ordenação',
+                              child: Text("Cancelar filtros"),
                             )
                           ),
-                        )
-                      ],
-                    ),
-                    Expanded(
-                      child: Center(
-                  child: ListView.builder(
-                    itemCount: games.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final game = games[index];
-
-                      return InkWell(
-                        onLongPress: () => print(game),
-                        onTap: () => navigateToGameDetails(context, game),
-                        child: ListTile(
-                          title: Text(game['title']),
-                          subtitle: Text('USD ${game['normalPrice']}'),
-                          leading: ClipRRect(
-                            borderRadius: BorderRadius.circular(5),
-                            child: Image.network(game['thumb'])
-                          ),
                         ),
-                      );
-                    }
+
+                      const Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: 
+                            Center(
+                              child: MySteamFormFilterDrop(),
+                          ),
+                        )
+                      ),
+
+                      const Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: 
+                            Center(
+                              child: MySteamFormFilterValor(),
+                          ),
+                        )
+                      ),
+
+                      const Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Center(
+                            child: MySteamFormSort(),
+                          )
+                        ),
+                      )
+                    ],
                   ),
-                )
+
+                  Expanded(
+                    child: Center(
+                      child: ListView.builder(
+                        itemCount: games.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final game = games[index];
+
+                          return InkWell(
+                            onLongPress: () => print(game),
+                            onTap: () => navigateToGameDetails(context, game),
+                            child: ListTile(
+                              title: Text(game['title']),
+                              subtitle: Text('USD ${game['normalPrice']}'),
+                              leading: ClipRRect(
+                                borderRadius: BorderRadius.circular(5),
+                                child: Image.network(game['thumb'])
+                              ),
+                            ),
+                          );
+                        }
+                      ),
+                    )
+                  )
+                ]
               )
-                ])
             );
           case StatusApp.error:
             return const Center(
                 child: Text("error")
               );
-        }
-        return const Text("Erro desconhecido");
+          }
+            return const Text("Erro desconhecido");
       }
     );
-    
-    
   }
 }
 
