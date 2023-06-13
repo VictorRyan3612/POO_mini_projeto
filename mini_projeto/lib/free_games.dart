@@ -62,7 +62,13 @@ class FreeGames extends HookWidget {
                           ),
                         ),
                         Expanded(
-                          child: Center(child: Text("Teste de ordenação"))
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: 
+                              Center(
+                                child: MyFreeGamesFormSort(),
+                            ),
+                          )
                         )
                       ],
                     ),

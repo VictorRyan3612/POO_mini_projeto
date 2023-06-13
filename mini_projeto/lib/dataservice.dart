@@ -23,22 +23,15 @@ class DataService{
       var response = null;
       var url = 'https://www.freetogame.com/api/games?';
 
-      if (filter == ''){
-        response = await http.get(Uri.parse('$url'));
-
-      }
-      else{
+      if (filter != ''){
         url = url + '&category=$filter&';
-        response = await http.get(Uri.parse('$url'));
       }
-      
-      if (ordem == ''){
-        response = await http.get(Uri.parse('$url'));
-      }
-      else{
+
+      if (ordem != ''){
         url = url + '&sort-by=$ordem&';
-        response = await http.get(Uri.parse('$url'));
       }
+      response = await http.get(Uri.parse('$url'));
+      
       final jsonResponse = jsonDecode(response.body);
 
       gameStateNotifier.value = {

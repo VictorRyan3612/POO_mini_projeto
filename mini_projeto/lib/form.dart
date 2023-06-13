@@ -32,10 +32,6 @@ class MyFreeGamesForm extends HookWidget {
                 child: Text('Shooter'),
               ),
               DropdownMenuItem<String>(
-                value: 'action',
-                child: Text('Action'),
-              ),
-              DropdownMenuItem<String>(
                 value: 'sci-fi',
                 child: Text('Sci-fi'),
               ),
@@ -50,6 +46,43 @@ class MyFreeGamesForm extends HookWidget {
               DropdownMenuItem<String>(
                 value: 'anime',
                 child: Text('Anime'),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+class MyFreeGamesFormSort extends HookWidget {
+  
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      child:  Column(
+        children: [
+          DropdownButtonFormField<String>(
+            decoration: const InputDecoration(labelText: 'Ordenar por'),
+            onChanged: (ordenar) {
+              dataService.fetchFreeGamesData(ordem: ordenar.toString());
+            },
+            
+            items: const [
+              DropdownMenuItem<String>(
+                value: '',
+                child: Text('Cancelar filtro'),
+              ),
+              DropdownMenuItem<String>(
+                value: 'alphabetical',
+                child: Text('alphabetical'),
+              ),
+              DropdownMenuItem<String>(
+                value: 'popularity',
+                child: Text('popularity'),
+              ),
+              DropdownMenuItem<String>(
+                value: 'release-date',
+                child: Text('release-date'),
               ),
             ],
           ),
