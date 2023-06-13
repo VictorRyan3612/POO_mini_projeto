@@ -57,7 +57,7 @@ class DataService{
 
 
 
-  Future<void> fetchSalesGamesData({String filter = '', String ordem = ''}) async {
+  Future<void> fetchSalesGamesData({String filter = '', String valor ='', String ordem = ''}) async {
     try {
       gameStateNotifier.value = {
         'status': StatusApp.loading
@@ -67,14 +67,14 @@ class DataService{
 
 
       if (filter != ''){
-        url2 = parametros(url2 + '&lowerPrice=$filter&');
+        url2 = parametros(url2 + '&$filter=$valor&');
       }
 
       if (ordem != ''){
         url2 = parametros (url2 + '&sortBy=$ordem');
       }
       
-
+      print(url2);
       response = await http.get(Uri.parse('$url2'));
 
       final jsonResponse = jsonDecode(response.body);

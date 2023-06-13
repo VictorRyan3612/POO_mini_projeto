@@ -140,8 +140,8 @@ class MySteamFormFilterDrop extends HookWidget {
         children: [
           DropdownButtonFormField<String>(
             decoration: const InputDecoration(labelText: 'Filtrar'),
-            onChanged: (ordenar) {
-              dataService.fetchSalesGamesData(ordem: ordenar.toString());
+            onChanged: (filtrar) {
+              dataService.fetchSalesGamesData(filter: filtrar.toString());
             },
             
             items: const [
