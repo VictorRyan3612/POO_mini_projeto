@@ -13,6 +13,8 @@ var estadoAplicativo = {
 class DataService{
   final ValueNotifier<Map<String,dynamic>> gameStateNotifier = ValueNotifier(estadoAplicativo);
   String urlFinal ='';
+  var url = 'https://www.freetogame.com/api/games?';
+  
 
   String parametros(String urlInicial){
     return urlFinal = urlInicial;
@@ -25,7 +27,6 @@ class DataService{
         'status': StatusApp.loading
       };
       var response = null;
-      var url = 'https://www.freetogame.com/api/games?';
 
       if (filter != ''){
         url = parametros(url + '&category=$filter&');
@@ -34,7 +35,8 @@ class DataService{
       if (ordem != ''){
         url = parametros (url + '&sort-by=$ordem&');
       }
-      print(url);
+      
+
       response = await http.get(Uri.parse('$url'));
       
       final jsonResponse = jsonDecode(response.body);
