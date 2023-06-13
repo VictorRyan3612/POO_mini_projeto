@@ -131,7 +131,44 @@ class MySteamFormSort extends HookWidget {
   }
 }
 
-class MySteamFormFilter extends HookWidget {
+class MySteamFormFilterDrop extends HookWidget {
+  
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      child:  Column(
+        children: [
+          DropdownButtonFormField<String>(
+            decoration: const InputDecoration(labelText: 'Filtrar'),
+            onChanged: (ordenar) {
+              dataService.fetchSalesGamesData(ordem: ordenar.toString());
+            },
+            
+            items: const [
+              DropdownMenuItem<String>(
+                value: '',
+                child: Text('Cancelar Filtro'),
+              ),
+              DropdownMenuItem<String>(
+                value: 'upperPrice',
+                child: Text('Valor Máximo'),
+              ),
+              DropdownMenuItem<String>(
+                value: 'lowerPrice',
+                child: Text('Valor Mínimo'),
+              ),
+              DropdownMenuItem<String>(
+                value: 'Metacritic',
+                child: Text('Metacritic'),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+class MySteamFormFilterValor extends HookWidget {
   
   @override
   Widget build(BuildContext context) {
@@ -139,7 +176,7 @@ class MySteamFormFilter extends HookWidget {
       child:  Column(
         children: [
           TextFormField(
-            decoration: const InputDecoration(labelText: 'Valor Máximo'),
+            decoration: const InputDecoration(labelText: 'Valor'),
           )
         ],
       )
