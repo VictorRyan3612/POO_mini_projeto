@@ -22,10 +22,6 @@ class MyFreeGamesForm extends HookWidget {
             
             items: const [
               DropdownMenuItem<String>(
-                value: 'cancelar',
-                child: Text('Cancelar filtro'),
-              ),
-              DropdownMenuItem<String>(
                 value: 'racing',
                 child: Text('Racing'),
               ),

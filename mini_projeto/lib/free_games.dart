@@ -52,8 +52,23 @@ class FreeGames extends HookWidget {
                   children: [
                     
                     Row(
-                      children: const [
-                        Expanded(
+                      children:  [
+                          Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: ElevatedButton(
+                              style: ButtonStyle(
+                                shape:MaterialStatePropertyAll(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15.0)
+                                  )
+                                )
+                              ),
+                              onPressed:() => dataService.fetchFreeGamesData(cancelar: true),
+                              child: const Text("Cancelar filtros")
+                            ),
+                          ),
+                        
+                        const Expanded(
                           child: Padding(
                             padding: EdgeInsets.all(10),
                             child: Center(
@@ -61,7 +76,7 @@ class FreeGames extends HookWidget {
                             )
                           ),
                         ),
-                        Expanded(
+                        const Expanded(
                           child: Padding(
                             padding: EdgeInsets.all(10.0),
                             child: 

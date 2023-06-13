@@ -34,7 +34,7 @@ class DataService{
       if (ordem != ''){
         freetoGameURl = '$freetoGameURl&sort-by=$ordem&';
       }
-      if (cancelar == true || filter == 'cancelar'){
+      if (cancelar == true){
         dataService.cancelar();
       }
       print(freetoGameURl);
