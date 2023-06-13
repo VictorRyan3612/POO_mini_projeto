@@ -12,13 +12,19 @@ var estadoAplicativo = {
 
 class DataService{
   final ValueNotifier<Map<String,dynamic>> gameStateNotifier = ValueNotifier(estadoAplicativo);
+
   String urlFinal ='';
   var freetoGameURl = 'https://www.freetogame.com/api/games?';
-  var url2 = 'https://www.cheapshark.com/api/1.0/deals?storeID=1';
+  var saleGamesURL = 'https://www.cheapshark.com/api/1.0/deals?storeID=1';
 
-  void cancelar(){
+
+  void cancelarFreeGames(){
     freetoGameURl = 'https://www.freetogame.com/api/games?';
   }
+  void cancelarSaleGames(){
+    saleGamesURL = 'https://www.cheapshark.com/api/1.0/deals?storeID=1';
+  }
+
 
 
   Future<void> fetchFreeGamesData({String filter = '', String ordem = '', bool cancelar = false}) async {
@@ -26,6 +32,7 @@ class DataService{
       gameStateNotifier.value = {
         'status': StatusApp.loading
       };
+
       http.Response response;
 
       if (filter != ''){
@@ -35,11 +42,13 @@ class DataService{
         freetoGameURl = '$freetoGameURl&sort-by=$ordem&';
       }
       if (cancelar == true){
-        dataService.cancelar();
+        dataService.cancelarFreeGames();
       }
+
+
       print(freetoGameURl);
+
       response = await http.get(Uri.parse(freetoGameURl));
-      
       final jsonResponse = jsonDecode(response.body);
 
       gameStateNotifier.value = {
@@ -56,7 +65,7 @@ class DataService{
 
 
 
-  Future<void> fetchSalesGamesData({String filter = '', String valor ='15', String ordem = ''}) async {
+  Future<void> fetchSalesGamesData({String filter = '', String valor ='15', String ordem = '', bool cancelar = false}) async {
     try {
       gameStateNotifier.value = {
         'status': StatusApp.loading
@@ -66,16 +75,20 @@ class DataService{
 
 
       if (filter != ''){
-        url2 = '$url2&$filter=$valor&';
+        saleGamesURL = '$saleGamesURL&$filter=$valor&';
       }
 
       if (ordem != ''){
-        url2 = '$url2&sortBy=$ordem';
+        saleGamesURL = '$saleGamesURL&sortBy=$ordem';
       }
-      
-      print(url2);
-      response = await http.get(Uri.parse(url2));
+      if (cancelar == true){
+        dataService.cancelarSaleGames();
+      }
 
+
+      print(saleGamesURL);
+
+      response = await http.get(Uri.parse(saleGamesURL));
       final jsonResponse = jsonDecode(response.body);
 
       gameStateNotifier.value = {
