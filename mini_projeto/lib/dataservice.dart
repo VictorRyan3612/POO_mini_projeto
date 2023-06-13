@@ -14,7 +14,9 @@ class DataService{
   final ValueNotifier<Map<String,dynamic>> gameStateNotifier = ValueNotifier(estadoAplicativo);
   String urlFinal ='';
   var url = 'https://www.freetogame.com/api/games?';
-  
+  var url2 = 'https://www.cheapshark.com/api/1.0/deals?storeID=1';
+
+
 
   String parametros(String urlInicial){
     return urlFinal = urlInicial;
@@ -54,7 +56,8 @@ class DataService{
 
 
 
-  Future<void> fetchSalesGamesData({String ordem = ''}) async {
+
+  Future<void> fetchSalesGamesData({String filter = '', String ordem = ''}) async {
     try {
       gameStateNotifier.value = {
         'status': StatusApp.loading
@@ -62,13 +65,17 @@ class DataService{
 
       var response = null;
 
-      if (ordem == ''){
-        response = await http.get(Uri.parse('https://www.cheapshark.com/api/1.0/deals?storeID=1'));
-      }
-      else{
-        response = await http.get(Uri.parse('https://www.cheapshark.com/api/1.0/deals?storeID=1&sortBy=$ordem'));
+
+      if (filter != ''){
+        url2 = parametros(url2 + '&lowerPrice=$filter&');
       }
 
+      if (ordem != ''){
+        url2 = parametros (url2 + '&sortBy=$ordem');
+      }
+      
+
+      response = await http.get(Uri.parse('$url2'));
 
       final jsonResponse = jsonDecode(response.body);
 
