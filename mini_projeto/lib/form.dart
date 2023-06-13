@@ -93,43 +93,7 @@ class MyFreeGamesFormSort extends HookWidget {
 }
 
 @immutable
-class MySteamFormSort extends HookWidget {
-  
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-      child:  Column(
-        children: [
-          DropdownButtonFormField<String>(
-            decoration: const InputDecoration(labelText: 'Ordenar'),
-            onChanged: (ordenar) {
-              dataService.fetchSalesGamesData(ordem: ordenar.toString());
-            },
-            
-            items: const [
-              DropdownMenuItem<String>(
-                value: '',
-                child: Text('Cancelar ordenação'),
-              ),
-              DropdownMenuItem<String>(
-                value: 'Title',
-                child: Text('Titulo'),
-              ),
-              DropdownMenuItem<String>(
-                value: 'Price',
-                child: Text('Preço'),
-              ),
-              DropdownMenuItem<String>(
-                value: 'Metacritic',
-                child: Text('Metacritic'),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
+
 
 class MySteamFormFilterDrop extends HookWidget {
   
@@ -177,9 +141,51 @@ class MySteamFormFilterValor extends HookWidget {
         children: [
           TextFormField(
             decoration: const InputDecoration(labelText: 'Valor'),
+            
+            onFieldSubmitted: (filtrar) {
+              dataService.fetchSalesGamesData(filter: filtrar.toString());
+            },
           )
         ],
       )
+    );
+  }
+}
+
+class MySteamFormSort extends HookWidget {
+  
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      child:  Column(
+        children: [
+          DropdownButtonFormField<String>(
+            decoration: const InputDecoration(labelText: 'Ordenar'),
+            onChanged: (ordenar) {
+              dataService.fetchSalesGamesData(ordem: ordenar.toString());
+            },
+            
+            items: const [
+              DropdownMenuItem<String>(
+                value: '',
+                child: Text('Cancelar ordenação'),
+              ),
+              DropdownMenuItem<String>(
+                value: 'Title',
+                child: Text('Titulo'),
+              ),
+              DropdownMenuItem<String>(
+                value: 'Price',
+                child: Text('Preço'),
+              ),
+              DropdownMenuItem<String>(
+                value: 'Metacritic',
+                child: Text('Metacritic'),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
