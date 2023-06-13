@@ -48,8 +48,22 @@ const SaleGames({ Key? key }) : super(key: key);
                 body: Column (
                   children: [
                     Row(
-                      children: const [
-                        Expanded(
+                      children: [
+                        Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: ElevatedButton(
+                              style: ButtonStyle(
+                                shape:MaterialStatePropertyAll(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15.0)
+                                  )
+                                )
+                              ),
+                              onPressed:() => dataService.fetchSalesGamesData(cancelar: true),
+                              child: const Text("Cancelar filtros")
+                            ),
+                          ),
+                        const Expanded(
                           child: Padding(
                             padding: EdgeInsets.all(10.0),
                             child: 
@@ -58,7 +72,7 @@ const SaleGames({ Key? key }) : super(key: key);
                             ),
                           )
                         ),
-                        Expanded(
+                        const Expanded(
                           child: Padding(
                             padding: EdgeInsets.all(10.0),
                             child: 
@@ -67,7 +81,7 @@ const SaleGames({ Key? key }) : super(key: key);
                             ),
                           )
                         ),
-                        Expanded(
+                        const Expanded(
                           child: Padding(
                             padding: EdgeInsets.all(10),
                             child: Center(

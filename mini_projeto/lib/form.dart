@@ -112,10 +112,6 @@ class MySteamFormFilterDrop extends HookWidget {
             
             items: const [
               DropdownMenuItem<String>(
-                value: '',
-                child: Text('Cancelar Filtro'),
-              ),
-              DropdownMenuItem<String>(
                 value: 'upperPrice',
                 child: Text('Valor Máximo'),
               ),
