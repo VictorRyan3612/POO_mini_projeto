@@ -93,7 +93,7 @@ class MyFreeGamesFormSort extends HookWidget {
 }
 
 @immutable
-class MySteamForm extends HookWidget {
+class MySteamFormSort extends HookWidget {
   
   @override
   Widget build(BuildContext context) {
@@ -127,6 +127,22 @@ class MySteamForm extends HookWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class MySteamFormFilter extends HookWidget {
+  
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      child:  Column(
+        children: [
+          TextFormField(
+            decoration: const InputDecoration(labelText: 'Valor Máximo'),
+          )
+        ],
+      )
     );
   }
 }

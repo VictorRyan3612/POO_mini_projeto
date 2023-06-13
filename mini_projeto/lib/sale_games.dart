@@ -56,7 +56,7 @@ const SaleGames({ Key? key }) : super(key: key);
                             padding: const EdgeInsets.all(10.0),
                             child: 
                               Center(
-                                child: Text("Filtragem"),
+                                child: MySteamFormFilter(),
                             ),
                           )
                         ),
@@ -64,7 +64,7 @@ const SaleGames({ Key? key }) : super(key: key);
                           child: Padding(
                             padding: EdgeInsets.all(10),
                             child: Center(
-                              child: MySteamForm(),
+                              child: MySteamFormSort(),
                             )
                           ),
                         )
