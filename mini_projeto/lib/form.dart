@@ -6,6 +6,8 @@ import 'package:mini_projeto/dataservice.dart';
 
 @immutable
 class MyFreeGamesForm extends HookWidget {
+  const MyFreeGamesForm({super.key});
+
   
   @override
   Widget build(BuildContext context) {
@@ -55,6 +57,8 @@ class MyFreeGamesForm extends HookWidget {
   }
 }
 class MyFreeGamesFormSort extends HookWidget {
+  const MyFreeGamesFormSort({super.key});
+
   
   @override
   Widget build(BuildContext context) {
@@ -96,6 +100,8 @@ class MyFreeGamesFormSort extends HookWidget {
 
 
 class MySteamFormFilterDrop extends HookWidget {
+  const MySteamFormFilterDrop({super.key});
+
   
   @override
   Widget build(BuildContext context) {
@@ -133,6 +139,8 @@ class MySteamFormFilterDrop extends HookWidget {
   }
 }
 class MySteamFormFilterValor extends HookWidget {
+  const MySteamFormFilterValor({super.key});
+
   
   @override
   Widget build(BuildContext context) {
@@ -153,6 +161,8 @@ class MySteamFormFilterValor extends HookWidget {
 }
 
 class MySteamFormSort extends HookWidget {
+  const MySteamFormSort({super.key});
+
   
   @override
   Widget build(BuildContext context) {

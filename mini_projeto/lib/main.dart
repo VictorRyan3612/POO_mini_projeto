@@ -40,7 +40,7 @@ class MainApp extends HookWidget {
         '/FreeGames':(context) => const FreeGames(),
         '/freeGames/gameDetails': (context) => const FreeGameDetailsScreen(),
         '/SalesGames':(context) => const SaleGames(),
-        '/SalesGames/gameDetails':(context) => SaleGamesDetailsScreen(),
+        '/SalesGames/gameDetails':(context) => const SaleGamesDetailsScreen(),
         '/Configs':(context) => TelaConfigs(currentBrightness: currentBrightness),
       },
     );

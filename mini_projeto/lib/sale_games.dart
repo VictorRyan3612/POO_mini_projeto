@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'var_json.dart';
 import 'form.dart';
 
@@ -50,10 +48,10 @@ const SaleGames({ Key? key }) : super(key: key);
                 body: Column (
                   children: [
                     Row(
-                      children: [
+                      children: const [
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsets.all(10.0),
+                            padding: EdgeInsets.all(10.0),
                             child: 
                               Center(
                                 child: MySteamFormFilterDrop(),
@@ -62,7 +60,7 @@ const SaleGames({ Key? key }) : super(key: key);
                         ),
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsets.all(10.0),
+                            padding: EdgeInsets.all(10.0),
                             child: 
                               Center(
                                 child: MySteamFormFilterValor(),

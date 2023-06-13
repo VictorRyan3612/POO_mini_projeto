@@ -28,18 +28,18 @@ class DataService{
       gameStateNotifier.value = {
         'status': StatusApp.loading
       };
-      var response = null;
+      http.Response response;
 
       if (filter != ''){
-        url = parametros(url + '&category=$filter&');
+        url = parametros('$url&category=$filter&');
       }
 
       if (ordem != ''){
-        url = parametros (url + '&sort-by=$ordem&');
+        url = parametros ('$url&sort-by=$ordem&');
       }
       
 
-      response = await http.get(Uri.parse('$url'));
+      response = await http.get(Uri.parse(url));
       
       final jsonResponse = jsonDecode(response.body);
 
@@ -63,19 +63,19 @@ class DataService{
         'status': StatusApp.loading
       };
 
-      var response = null;
+      http.Response response;
 
 
       if (filter != ''){
-        url2 = parametros(url2 + '&$filter=$valor&');
+        url2 = parametros('$url2&$filter=$valor&');
       }
 
       if (ordem != ''){
-        url2 = parametros (url2 + '&sortBy=$ordem');
+        url2 = parametros ('$url2&sortBy=$ordem');
       }
       
       print(url2);
-      response = await http.get(Uri.parse('$url2'));
+      response = await http.get(Uri.parse(url2));
 
       final jsonResponse = jsonDecode(response.body);
 

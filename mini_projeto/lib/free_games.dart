@@ -52,7 +52,7 @@ class FreeGames extends HookWidget {
                   children: [
                     
                     Row(
-                      children: [
+                      children: const [
                         Expanded(
                           child: Padding(
                             padding: EdgeInsets.all(10),
@@ -63,7 +63,7 @@ class FreeGames extends HookWidget {
                         ),
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsets.all(10.0),
+                            padding: EdgeInsets.all(10.0),
                             child: 
                               Center(
                                 child: MyFreeGamesFormSort(),
