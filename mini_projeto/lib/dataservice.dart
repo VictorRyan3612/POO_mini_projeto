@@ -12,7 +12,11 @@ var estadoAplicativo = {
 
 class DataService{
   final ValueNotifier<Map<String,dynamic>> gameStateNotifier = ValueNotifier(estadoAplicativo);
+  String urlFinal ='';
 
+  String parametros(String urlInicial){
+    return urlFinal = urlInicial;
+  }
 
 
   Future<void> fetchFreeGamesData({String filter = '', String ordem = ''}) async {
@@ -24,12 +28,13 @@ class DataService{
       var url = 'https://www.freetogame.com/api/games?';
 
       if (filter != ''){
-        url = url + '&category=$filter&';
+        url = parametros(url + '&category=$filter&');
       }
 
       if (ordem != ''){
-        url = url + '&sort-by=$ordem&';
+        url = parametros (url + '&sort-by=$ordem&');
       }
+      print(url);
       response = await http.get(Uri.parse('$url'));
       
       final jsonResponse = jsonDecode(response.body);
