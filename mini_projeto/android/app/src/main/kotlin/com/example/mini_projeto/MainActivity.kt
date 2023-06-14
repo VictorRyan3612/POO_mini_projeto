@@ -1,4 +1,4 @@
-package com.example.mini_projeto
+package com.example.jogosbaratos
 
 import io.flutter.embedding.android.FlutterActivity
 
