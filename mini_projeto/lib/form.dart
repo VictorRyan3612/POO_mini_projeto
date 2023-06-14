@@ -107,7 +107,13 @@ class MySteamFormFilterDrop extends HookWidget {
           DropdownButtonFormField<String>(
             decoration: const InputDecoration(labelText: 'Filtrar'),
             onChanged: (filtrar) {
-              dataService.fetchSalesGamesData(filter: filtrar.toString());
+              dataService.filtroname = filtrar.toString();
+              // ValueListenableBuilder(
+              //   valueListenable: dataService.filtergameStateNotifier,
+                // builder: (_, value, __) {
+                //   value['filtro'] = filtrar;
+                // }
+              // );
             },
             
             items: const [
@@ -142,8 +148,8 @@ class MySteamFormFilterValor extends HookWidget {
           TextFormField(
             decoration: const InputDecoration(labelText: 'Valor'),
             
-            onFieldSubmitted: (filtrar) {
-              dataService.fetchSalesGamesData(filter: filtrar.toString());
+            onFieldSubmitted: (valorfiltro) {
+              dataService.fetchSalesGamesData(valor: valorfiltro);
             },
           )
         ],

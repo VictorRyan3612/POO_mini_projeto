@@ -8,14 +8,19 @@ enum StatusApp{idle,loading,ready,error}
 var estadoAplicativo = {
   'status':StatusApp.idle,
 };
+var filterjson = {
+  'status':StatusApp.idle,
+  'filtro': ''
+};
 
 
 class DataService{
   final ValueNotifier<Map<String,dynamic>> gameStateNotifier = ValueNotifier(estadoAplicativo);
-
-  String urlFinal ='';
+  String filtroname = '';
+  
   var freetoGameURl = 'https://www.freetogame.com/api/games?';
   var saleGamesURL = 'https://www.cheapshark.com/api/1.0/deals?storeID=1';
+  
 
 
   void cancelarFreeGames(){
@@ -65,7 +70,8 @@ class DataService{
 
 
 
-  Future<void> fetchSalesGamesData({String filter = '', String valor ='15', String ordem = '', bool cancelar = false}) async {
+  Future<void> fetchSalesGamesData({String filter = '', String valor ='', String ordem = '', bool cancelar = false}) async {
+
     try {
       gameStateNotifier.value = {
         'status': StatusApp.loading
@@ -74,7 +80,10 @@ class DataService{
       http.Response response;
 
 
-      if (filter != ''){
+      filter =  filtroname;
+      print('filtro=$filtroname');
+      print("valor = $valor");
+      if (valor != '' && filter != ''){
         saleGamesURL = '$saleGamesURL&$filter=$valor&';
       }
 
