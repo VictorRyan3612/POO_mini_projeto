@@ -41,17 +41,15 @@ class DataService{
       http.Response response;
 
       if (filter != ''){
-        freetoGameURl = '$freetoGameURl&category=$filter&';
+        freetoGameURl = '$freetoGameURl&category=$filter';
       }
       if (ordem != ''){
-        freetoGameURl = '$freetoGameURl&sort-by=$ordem&';
+        freetoGameURl = '$freetoGameURl&sort-by=$ordem';
       }
       if (cancelar == true){
         dataService.cancelarFreeGames();
       }
 
-
-      print(freetoGameURl);
 
       response = await http.get(Uri.parse(freetoGameURl));
       final jsonResponse = jsonDecode(response.body);
@@ -64,7 +62,6 @@ class DataService{
     catch (error) {
       gameStateNotifier.value['status'] = StatusApp.error;
     }
-    print("${gameStateNotifier.value['status']}");
   }
 
 
@@ -81,10 +78,8 @@ class DataService{
 
 
       filter =  filtroname;
-      print('filtro=$filtroname');
-      print("valor = $valor");
       if (valor != '' && filter != ''){
-        saleGamesURL = '$saleGamesURL&$filter=$valor&';
+        saleGamesURL = '$saleGamesURL&$filter=$valor';
       }
 
       if (ordem != ''){
@@ -95,7 +90,6 @@ class DataService{
       }
 
 
-      print(saleGamesURL);
 
       response = await http.get(Uri.parse(saleGamesURL));
       final jsonResponse = jsonDecode(response.body);
@@ -108,7 +102,6 @@ class DataService{
     catch (error) {
       gameStateNotifier.value['status'] = StatusApp.error;
     }
-    print("${gameStateNotifier.value['status']}");
   }
 
 

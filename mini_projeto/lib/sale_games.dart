@@ -111,7 +111,7 @@ const SaleGames({ Key? key }) : super(key: key);
                             onTap: () => navigateToGameDetails(context, game),
                             child: ListTile(
                               title: Text(game['title']),
-                              subtitle: Text('USD ${game['normalPrice']}'),
+                              subtitle: Text('USD ${game['salePrice']}'),
                               leading: ClipRRect(
                                 borderRadius: BorderRadius.circular(5),
                                 child: Image.network(game['thumb'])

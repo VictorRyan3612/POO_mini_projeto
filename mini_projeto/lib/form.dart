@@ -175,10 +175,6 @@ class MySteamFormSort extends HookWidget {
             
             items: const [
               DropdownMenuItem<String>(
-                value: '',
-                child: Text('Cancelar ordenação'),
-              ),
-              DropdownMenuItem<String>(
                 value: 'Title',
                 child: Text('Titulo'),
               ),
