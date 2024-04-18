@@ -21,7 +21,22 @@ class TelaConfigs extends HookWidget{
               padding: const EdgeInsets.all(12),
               child: ListView(
                 children: [
-                  ListTile(),
+                  ListTile(
+                    title: Text("Modo Escuro"),
+                    // subtitle: Text(""),
+                    trailing: Switch(
+                      value: currentBrightness.value == Brightness.dark ? true : false , 
+                      onChanged: (value) {
+                        if (currentBrightness.value == Brightness.dark) {
+                          currentBrightness.value = Brightness.light;
+                        } 
+                        else {
+                          currentBrightness.value = Brightness.dark;
+                        }
+                      }
+                    ),
+                    
+                  ),
                 ],
               ),
             ),
